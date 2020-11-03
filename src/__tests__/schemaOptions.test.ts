@@ -34,5 +34,37 @@ class TestSchema extends Schema {
 describe('Decorator tests', () => {
   test('Test schema', () => {
     const schema = new TestSchema()
+    expect(schema.schema).toMatchObject({
+      properties: {
+           testProp: {
+                type: 'string',
+                minimum: 1,
+                maximum: 4
+           },
+           what: {
+                type: 'string',
+                enum: [
+                     'good',
+                     'bad'
+                ]
+           },
+           other: {
+                $ref: '/TestSchema2Create'
+           },
+           numberList: {
+                item: {
+                     type: 'number'
+                }
+           },
+           otherList: {
+                item: {
+                     $ref: '/TestSchema2Create'
+                }
+           }
+      },
+      required: [
+           'testProp'
+      ]
+ })
   })
 })
