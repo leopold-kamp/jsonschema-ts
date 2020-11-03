@@ -9,8 +9,18 @@ export function prop (config: ISchemaOptions): any {
       target._schema = {}
     }
     const meta = Reflect.getMetadata('design:type', target, key as string)
-    console.log(meta.name)
-    addProperty(target, key, config, meta)
+    if (!target.schema.properties) {
+      target.schema.properties = {}
+    }
+    let data: any = {}
+    if (meta.name === 'Array') {
+      if (config.type) {
+        data.item = addProperty(config, config.type, target)
+      }
+    } else {
+      data = addProperty(config, meta, target)
+    }
+    target.schema.properties[key] = data
     // tslint:disable-next-line: only-arrow-functions
     if (config.required) {
       addRequired(target.schema, key)
@@ -52,19 +62,58 @@ const addRef = (target: Schema, meta: any, data: any) => {
   }
 }
 
-const addProperty = (target: Schema, key: any, options: ISchemaOptions, meta: any) => {
-  if (!target.schema.properties) {
-    target.schema.properties = {}
-  }
-  const data: any = {}
+const addProperty = (options: ISchemaOptions, meta: any, target: Schema, data: any = {}) => {
   if (meta.name === 'String' || meta.name === 'Number') {
     data.type = meta.name.toLowerCase()
   }
+  applyOptions(data, options)
   if (options.enum) {
     data.enum = Object.values(options.enum)
   } else if (meta.prototype.id) {
     addRef(target, meta, data)
+  } else if (meta.name === 'Array') {
+    if (meta.type) {
+      data.item = {}
+      addRef(target, meta, data.item)
+    }
   }
-  target.schema.properties[key] = data
+  return data
 }
+
+const applyOptions = (data: any, options: ISchemaOptions) => {
+  if (_.isNumber(options.minimum)) {
+    data.minimum = options.minimum
+  }
+  if (_.isNumber(options.maximum)) {
+    data.maximum = options.maximum
+  }
+  if (_.isNumber(options.multipleOf)) {
+    data.multipleOf = options.multipleOf
+  }
+  if (_.isNumber(options.minLength)) {
+    data.minLength = options.minLength
+  }
+  if (_.isNumber(options.maxLength)) {
+    data.maxLength = options.maxLength
+  }
+  if (_.isNumber(options.minItems)) {
+    data.minItems = options.minItems
+  }
+  if (_.isNumber(options.maxItems)) {
+    data.maxItems = options.maxItems
+  }
+  if (options.pattern) {
+    data.pattern = options.pattern
+  }
+  if (_.isBoolean(options.uniqueItems)) {
+    data.uniqueItems = options.uniqueItems
+  }
+  if (_.isBoolean(options.exclusiveMaximum)) {
+    data.exclusiveMaximum = options.exclusiveMaximum
+  }
+  if (_.isBoolean(options.exclusiveMaximum)) {
+    data.exclusiveMinimum = options.exclusiveMinimum
+  }
+}
+
 //

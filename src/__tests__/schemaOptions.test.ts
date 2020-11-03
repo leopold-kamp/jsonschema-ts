@@ -14,7 +14,7 @@ class TestSchema2 extends Schema {
 
 @schemaOptions({ id: '/TestSchemaCreate' })
 class TestSchema extends Schema {
-  @prop({ required: true })
+  @prop({ required: true, minimum: 1, maximum: 4 })
   testProp!: string
 
   @prop({ enum: ETEST})
@@ -23,12 +23,16 @@ class TestSchema extends Schema {
   @prop({})
   other!: TestSchema2
 
+  @prop({ type: Number })
+  numberList!: number[]
+
+  @prop({ type: TestSchema2 })
+  otherList!: TestSchema2[]
+
 }
 
 describe('Decorator tests', () => {
   test('Test schema', () => {
     const schema = new TestSchema()
-    console.log(schema.schema)
-    console.log(schema.additionalSchemas)
   })
 })

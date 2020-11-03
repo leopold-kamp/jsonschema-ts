@@ -1,15 +1,14 @@
-import { EnumType } from "typescript"
+import { ClassDeclaration, ConstructorDeclaration, EnumType, Type } from "typescript"
 
 export interface ISchemaOptions {
   id?: string
   $schema?: string
-  $ref?: string
   title?: string
   description?: string
-  multipleOf?: number
-  maximum?: number
+  multipleOf?: number // done
+  maximum?: number // done
   exclusiveMaximum?: boolean
-  minimum?: number
+  minimum?: number // done
   exclusiveMinimum?: boolean
   maxLength?: number
   minLength?: number
@@ -32,7 +31,7 @@ export interface ISchemaOptions {
       [name: string]: Schema | string[]
   }*/
   enum?: any // => Refer to enum
-  type?: string | string[]
+  type?: any
   format?: string
   /* allOf?: Schema[]
   anyOf?: Schema[]
