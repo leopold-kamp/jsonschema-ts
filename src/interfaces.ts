@@ -1,3 +1,5 @@
+import { EnumType } from "typescript"
+
 export interface ISchemaOptions {
   id?: string
   $schema?: string
@@ -29,7 +31,7 @@ export interface ISchemaOptions {
   dependencies?: {
       [name: string]: Schema | string[]
   }*/
-  // 'enum'?: any[] => Refer to enum
+  enum?: any // => Refer to enum
   type?: string | string[]
   format?: string
   /* allOf?: Schema[]
@@ -39,16 +41,34 @@ export interface ISchemaOptions {
 }
 
 export interface ISchemaClassOptions {
-  id?: string
+  id?: string,
+  additionalProperties?: boolean
 }
 
 export abstract class Schema {
   _schema?: any
   private _id?: string
+  private _additionalProperties?: boolean
+
+  _additionalSchemas?: Schema[]
   get id () {
     return this._id
   }
   get schema () {
     return this._schema
+  }
+  get additionalSchemas () {
+    return this._additionalSchemas
+  }
+  get additionalProperties () {
+    return this._additionalProperties
+  }
+
+  get jsonschema () {
+    return {
+      id: this.id,
+      additionalProperties: this.additionalProperties,
+      ...this.schema
+    }
   }
 }

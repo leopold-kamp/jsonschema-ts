@@ -27,6 +27,7 @@
   "homepage": "https://github.com/leopold-kamp/jsonschema-ts#readme",
   "dependencies": {
     "jsonschema": "^1.4.0",
+    "lodash": "^4.17.20",
     "reflect-metadata": "^0.1.13",
     "tslint": "^6.1.3",
     "typescript": "^4.0.5"
