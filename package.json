@@ -1,5 +1,5 @@
 {
-  "name": "jsonschema-ts",
+  "name": "jsonschema-types",
   "version": "0.0.1",
   "description": "A helper build ontop of \"jsonschema\" to create class Based json schemas",
   "main": "index.js",
@@ -16,6 +16,9 @@
   "keywords": [
     "json",
     "jsonschema",
+    "jsonschema-ts",
+    "typescript",
+    "schema-validation",
     "api",
     "validation"
   ],
