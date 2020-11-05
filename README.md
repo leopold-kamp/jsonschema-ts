@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/jsonschema-types.svg)](https://badge.fury.io/js/jsonschema-types)
+
 # jsonschema-types #
 
 This package enables building Jsonschemas as Typescript classes.

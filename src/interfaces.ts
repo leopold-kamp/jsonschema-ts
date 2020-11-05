@@ -1,4 +1,3 @@
-import { ClassDeclaration, ConstructorDeclaration, EnumType, Type } from "typescript"
 
 export interface ISchemaOptions {
   id?: string
