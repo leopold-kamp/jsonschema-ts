@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint --project .",
-    "build": "tsc --module commonjs index.ts"
+    "build": "tsc --module commonjs --target esnext index.ts"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "lodash": "^4.17.20",
     "reflect-metadata": "^0.1.13",
     "tslint": "^6.1.3",
-    "typescript": "^4.0.5"
+    "typescript": "^3.9.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
