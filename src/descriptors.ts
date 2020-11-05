@@ -70,6 +70,8 @@ const addRef = (target: Schema, meta: any, data: any) => {
 const addProperty = (options: ISchemaOptions, meta: any, target: Schema, data: any = {}) => {
   if (meta.name === 'String' || meta.name === 'Number') {
     data.type = meta.name.toLowerCase()
+  } else if (meta.name === 'Date') {
+    data.type = 'date-time'
   }
   applyOptions(data, options)
   if (options.enum) {

@@ -52,6 +52,9 @@ describe('Decorator tests', () => {
 				regex: {
 					type: 'string',
 					pattern: '/abc/'
+				},
+				someDate: {
+					type: 'date-time'
 				}
 			},
 			required: [
