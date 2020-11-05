@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import { Validator } from 'jsonschema'
 const propMetadataKey = Symbol('prop')
 
-export function prop (config: ISchemaOptions): any {
+export function prop (config: ISchemaOptions = {}): any {
   return  <T extends Schema>(target: T, key: keyof T, descriptor: PropertyDescriptor): any => {
     if (!target.schema) {
       target._schema = {}
@@ -68,7 +68,7 @@ const addRef = (target: Schema, meta: any, data: any) => {
 }
 
 const addProperty = (options: ISchemaOptions, meta: any, target: Schema, data: any = {}) => {
-  if (meta.name === 'String' || meta.name === 'Number') {
+  if (meta.name === 'String' || meta.name === 'Number' || meta.name === 'Boolean') {
     data.type = meta.name.toLowerCase()
   } else if (meta.name === 'Date') {
     data.type = 'date-time'

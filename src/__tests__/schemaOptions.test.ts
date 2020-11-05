@@ -55,6 +55,9 @@ describe('Decorator tests', () => {
 				},
 				someDate: {
 					type: 'date-time'
+				},
+				valid: {
+					type: 'boolean'
 				}
 			},
 			required: [

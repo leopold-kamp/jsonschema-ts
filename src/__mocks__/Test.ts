@@ -41,6 +41,9 @@ export class TestSchema extends Schema {
   @prop({ exclusiveMinimum: true, exclusiveMaximum: true })
   exclusive!: number
 
-  @prop({})
+  @prop()
   someDate!: Date
+
+  @prop()
+  valid!: boolean
 }
