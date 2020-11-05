@@ -1,12 +1,16 @@
 import { ISchemaClassOptions, ISchemaOptions, Schema } from './interfaces'
 import 'reflect-metadata'
 import * as _ from 'lodash'
+import { Validator } from 'jsonschema'
 const propMetadataKey = Symbol('prop')
 
 export function prop (config: ISchemaOptions): any {
   return  <T extends Schema>(target: T, key: keyof T, descriptor: PropertyDescriptor): any => {
     if (!target.schema) {
       target._schema = {}
+    }
+    if (!target.validator) {
+      target.validator = new Validator()
     }
     const meta = Reflect.getMetadata('design:type', target, key as string)
     if (!target.schema.properties) {
@@ -59,6 +63,7 @@ const addRef = (target: Schema, meta: any, data: any) => {
     return val.id === data.$ref
   })) === -1) {
     target.additionalSchemas.push(meta.prototype)
+    target.validator.addSchema(meta.prototype.jsonschema)
   }
 }
 

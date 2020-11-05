@@ -60,4 +60,15 @@ describe('Decorator tests', () => {
 			]
 		})
 	})
+	test('Test validate', () => {
+		const schema = new TestSchema()
+		const result = schema.validate({
+			testProp: 'test',
+			minLen: 'fit',
+			other: {
+				num: 3
+			}
+		})
+		expect(result.valid).toBeTruthy()
+	})
 })

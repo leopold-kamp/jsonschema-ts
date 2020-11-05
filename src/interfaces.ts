@@ -1,3 +1,4 @@
+import { Options, SchemaContext, Validator } from "jsonschema"
 
 export interface ISchemaOptions {
   id?: string
@@ -47,6 +48,7 @@ export abstract class Schema {
   _schema?: any
   private _id?: string
   private _additionalProperties?: boolean
+  validator: Validator
 
   _additionalSchemas?: Schema[]
   get id () {
@@ -60,6 +62,10 @@ export abstract class Schema {
   }
   get additionalProperties () {
     return this._additionalProperties
+  }
+
+  validate (toValidate: any, options?: Options, ctx?: SchemaContext) {
+    return this.validator.validate(toValidate, this.jsonschema, options, ctx)
   }
 
   get jsonschema () {

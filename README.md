@@ -10,6 +10,9 @@ You can access the schema with
 new TestSchema().jsonschema
 ```
 
+Test the schema with ```validate```
+It uses the validate function of [jsonschema](https://www.npmjs.com/package/jsonschema)
+
 ## Example ##
 ```ts
 @schemaOptions({ id: '/TestSchemaCreate' })
